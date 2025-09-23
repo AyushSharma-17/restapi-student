@@ -34,6 +34,7 @@ public class StudentServiceImpl implements StudentService {
         return studentDtoList;
     }
     //getting student by id
+    @Override
     public StudentDto getStudentById(long id) {
         Student student = studentRepository.findById(id).orElseThrow(()-> new RuntimeException("Student not found"));
        StudentDto studentDto = modelMapper.map(student, StudentDto.class);
