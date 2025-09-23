@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.restapilearning.restapi.Repository.StudentRepository;
+import com.restapilearning.restapi.dto.AddStudentRequestDto;
 import com.restapilearning.restapi.dto.StudentDto;
 import com.restapilearning.restapi.entity.Student;
 
@@ -39,5 +40,13 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findById(id).orElseThrow(()-> new RuntimeException("Student not found"));
        StudentDto studentDto = modelMapper.map(student, StudentDto.class);
        return studentDto;
+    }
+    //creating new student
+    @Override
+    public StudentDto createNewStudent(AddStudentRequestDto addStudentRequestDto) {
+        Student student = modelMapper.map(addStudentRequestDto, Student.class);
+        Student savedStudent = studentRepository.save(student);
+        StudentDto studentDto = modelMapper.map(savedStudent, StudentDto.class);
+        return studentDto;
     }
 }

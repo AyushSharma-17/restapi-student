@@ -2,16 +2,22 @@ package com.restapilearning.restapi.controoler;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapilearning.restapi.Repository.StudentRepository;
 import com.restapilearning.restapi.Services.StudentService;
+import com.restapilearning.restapi.dto.AddStudentRequestDto;
 import com.restapilearning.restapi.dto.StudentDto;
 import com.restapilearning.restapi.entity.Student;
 
 import lombok.RequiredArgsConstructor;
+
 
 
 
@@ -32,7 +38,7 @@ public class StudentController {
 
     
 
-    @GetMapping("/studentall")
+    @GetMapping("/students")
     public List <Student> getStudents() {
         return studentRepository.findAll();
     }
@@ -42,5 +48,14 @@ public class StudentController {
     public StudentDto getStudentById(@PathVariable long id) {
         return studentService.getStudentById(id);
     }
+
+    //post mapping for creating student
+    @PostMapping("/students")
+    public ResponseEntity <StudentDto> createNewStudent(@RequestBody AddStudentRequestDto addStudentRequestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createNewStudent(addStudentRequestDto));
+        
+        
+    }
+    
     
 }
