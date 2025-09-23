@@ -11,10 +11,23 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class student {
+public class Student {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String Email;
+    private String email;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
 }
